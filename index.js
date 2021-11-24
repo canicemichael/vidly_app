@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { endpoint, masterKey, port } = require('./config');
+
 const genres = require('./routes/genres');
+const customers = require('./routes/customers');
 
 const app = express();
 
@@ -12,6 +14,7 @@ mongoose.connect("mongodb://localhost/vidly_app2", { useNewUrlParser: true, useU
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/genres', genres);
+app.use('/api/customers', customers);
 
 app.listen(port, () => {
     console.log(`Listening to http://localhost:${port}`);
