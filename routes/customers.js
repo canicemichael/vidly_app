@@ -13,7 +13,7 @@ router.get('/cust/:id', async (req, res) => {
     if (!customer) return res.status(404).send('The customer with the given ID was not found');
 
     res.send(customer);
-})
+});
 
 router.post('/', async (req, res) => {
     const { error } = validateCustomer(req.body);
