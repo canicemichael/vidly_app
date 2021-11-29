@@ -1,8 +1,19 @@
 const bcrypt = require('bcrypt');
+const {auth} = require('../middleware/auth');
 const _ = require('lodash');
 const express = require('express');
-const { User, validateUser } = require('../models/user')
+const { User, validateUser } = require('../models/user');
 const router = express.Router();
+
+router.get("/me", auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.header._id).select('-password');  // this is not working
+        res.send(user);
+    } catch(error) {
+        console.log(error);
+        res.send('An error occured');
+    }
+})
 
 router.post('/', async (req, res) => {
     const { error } = validateUser(req.body);
