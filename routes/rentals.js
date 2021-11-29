@@ -1,6 +1,7 @@
 const { Rental, validateRental } = require('../models/rental');
 const { Movie } = require('../models/movie');
 const { Customer } = require('../models/customer');
+const { auth } = require('../middleware/auth');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
     res.send(rental);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const { error } = validateRental(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -43,7 +44,6 @@ router.post('/', async (req, res) => {
     movie.save();
 
     res.send(rental);
-
 });
 
 module.exports = router;
