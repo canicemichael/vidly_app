@@ -7,5 +7,5 @@ module.exports = {
     port: process.env.PORT
 };
 
-const MONGODB_URI = 'mongodb+srv://canicemike:Canicemike1@cluster0.qgahg.mongodb.net/vidly?retryWrites=true&w=majority';
-exports.MONGODB_URI = MONGODB_URI;
+// const MONGODB_URI = 'mongodb+srv://canicemike:Canicemike1@cluster0.qgahg.mongodb.net/vidly?retryWrites=true&w=majority';
+// exports.MONGODB_URI = MONGODB_URI;

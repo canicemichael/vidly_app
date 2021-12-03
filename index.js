@@ -1,3 +1,6 @@
+require('express-async-errors');
+const winston = require('winston');
+const {error, logger} = require('./middleware/error');
 const config = require('config');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
@@ -11,8 +14,15 @@ const movies = require('./routes/movies');
 const rentals = require('./routes/rentals');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const { transports } = require('winston');
 
 const app = express();
+
+// for handling unCaughtExceptions and Rejected Promises
+logger.exceptions.handle(
+    new transports.File({ filename: 'exceptions.log' })
+);
+
 
 if (!config.get('jwtPrivateKey')) {
     console.error('FATAL ERROR: jwtPrivateKey is not defined.');
@@ -29,6 +39,7 @@ mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!!');
 })
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/genres', genres);
@@ -37,6 +48,8 @@ app.use('/api/movies', movies);
 app.use('/api/rentals', rentals);
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+
+app.use(error);
 
 app.listen(port, () => {
     console.log(`Listening to http://localhost:${port}`);
