@@ -14,11 +14,11 @@ const logger = winston.createLogger({
                winston.format.simple()
             )
         })
+    ],
+    exceptionHandlers: [
+        new winston.transports.File({ filename: 'exceptions.log' }),
+        new winston.transports.Console({ level: 'info', format: winston.format.json() })
     ]
-    // ,
-    // exceptionHandlers: [
-    //     new transports.File({ filename: 'exceptions.log' })
-    // ]
 });
 
 function error(err, req, res, next) {

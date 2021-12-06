@@ -1,55 +1,17 @@
-require('express-async-errors');
-const winston = require('winston');
 const {error, logger} = require('./middleware/error');
-const config = require('config');
-const Joi = require('joi');
-Joi.objectId = require('joi-objectid')(Joi);
+const winston = require('winston');
 const express = require('express');
-const mongoose = require('mongoose');
-const { endpoint, masterKey, port } = require('./config');
 
-const genres = require('./routes/genres');
-const customers = require('./routes/customers');
-const movies = require('./routes/movies');
-const rentals = require('./routes/rentals');
-const users = require('./routes/users');
-const auth = require('./routes/auth');
-const { transports } = require('winston');
+const { endpoint, masterKey, port } = require('./config');
 
 const app = express();
 
-// for handling unCaughtExceptions and Rejected Promises
-logger.exceptions.handle(
-    new transports.File({ filename: 'exceptions.log' })
-);
+require('./startup/logging')();
+require('./startup/validation')();
+require('./startup/routes')(app);
+require('./startup/config')();
 
-
-if (!config.get('jwtPrivateKey')) {
-    console.error('FATAL ERROR: jwtPrivateKey is not defined.');
-    process.exit(1);
-}
-
-const MONGODB_URI = 'mongodb+srv://canicemike:Canicemike1@cluster0.qgahg.mongodb.net/vidly?retryWrites=true&w=majority';
-
-mongoose.connect(MONGODB_URI , { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDb'))
-    .catch(err => console.error('Error!.. connection wasn\'t made... ', err))
-
-mongoose.connection.on('connected', () => {
-    console.log('Mongoose is connected!!!');
-})
-
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use('/api/genres', genres);
-app.use('/api/customers', customers);
-app.use('/api/movies', movies);
-app.use('/api/rentals', rentals);
-app.use('/api/users', users);
-app.use('/api/auth', auth);
-
-app.use(error);
+require('./startup/db')();
 
 app.listen(port, () => {
     console.log(`Listening to http://localhost:${port}`);
