@@ -1,5 +1,3 @@
-const {error, logger} = require('./middleware/error');
-const winston = require('winston');
 const express = require('express');
 
 const { endpoint, masterKey, port } = require('./config');
