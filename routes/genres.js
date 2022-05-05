@@ -6,11 +6,13 @@ const { auth } = require('../middleware/auth');
 const {admin} = require('../middleware/admin');
 const router = express.Router();
 
+// get all genres
 router.get('/', async (req, res) => {
     const genre = await Genre.find().sort('name');
     res.send(genre);
 });
 
+// Create new genre
 router.post('/', auth, async (req, res) => {
     const { error } = validateGenre(req.body);
     if (error) return res.status(400).send(error.details[0].message);
