@@ -21,5 +21,16 @@ npm i
 ```
 node seed.js
 ```
+### Start the Server
+```
+node index,js
+```
+This will launch the Node server on port 3900. If that port is busy, you can set a different point in config/default.json
+
+Open up your browser and head over to:
+
+[http://localhost:3900/api/genres](http://localhost:3900/api/genres)
+
+You should see the list of genres. That confirms that you have set up everything successfully.
 <hr/>
 The postman documentation [is here](https://documenter.getpostman.com/view/16601080/UyxepodD). 
