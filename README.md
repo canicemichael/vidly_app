@@ -45,4 +45,4 @@ On Windows:
 set vidly_jwtPrivateKey=yourSecureKey
 ```
 <hr/>
-The postman documentation [is here](https://documenter.getpostman.com/view/16601080/UyxepodD). 
+[The postman documentation](https://documenter.getpostman.com/view/16601080/UyxepodD).
