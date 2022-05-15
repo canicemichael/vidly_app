@@ -32,5 +32,17 @@ Open up your browser and head over to:
 [http://localhost:3900/api/genres](http://localhost:3900/api/genres)
 
 You should see the list of genres. That confirms that you have set up everything successfully.
+
+### (Optional) Environment Variables
+If you look at config/default.json, you'll see a property called jwtPrivateKey. This key is used to encrypt JSON web tokens. SO, for security reasons, it should not be checked into the source control. I've set a default value here to make it easier for you to get up and running with this project. For a production scenario, you should store this key as an environment variable.
+
+On Mac:
+```
+export vidly_jwtPrivateKey=yourSecureKey
+```
+On Windows:
+```
+set vidly_jwtPrivateKey=yourSecureKey
+```
 <hr/>
 The postman documentation [is here](https://documenter.getpostman.com/view/16601080/UyxepodD). 
