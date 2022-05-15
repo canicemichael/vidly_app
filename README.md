@@ -11,5 +11,15 @@ To run this project, you need to install the latest version of MongoDB Community
 
 Once you install MongoDB, make sure it's running.
 
+### Install the Dependencies
+Next, from the project folder, install the dependencies:
+```
+npm i
+```
+
+### Populate the Database
+```
+node seed.js
+```
 <hr/>
 The postman documentation [is here](https://documenter.getpostman.com/view/16601080/UyxepodD). 
