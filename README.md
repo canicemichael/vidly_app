@@ -6,7 +6,9 @@ Make sure to follow all these steps exactly as explained below. Do not miss any 
 
 ### Install MongoDB
 To run this project, you need to install the latest version of MongoDB Community Edition first.
+
 [https://docs.mongodb.com/manual/installation/](https://docs.mongodb.com/manual/installation/)
+
 Once you install MongoDB, make sure it's running.
 
 <hr/>
